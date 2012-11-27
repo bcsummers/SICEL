@@ -3,7 +3,7 @@
 # vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 #-------------------------------------------------------------------------------
-# Last-Updated :: <2012 Nov 26 10:05:58 PM Bracey Summers>
+# Last-Updated :: <2012 Nov 26 10:14:41 PM Bracey Summers>
 #
 # sicel.sh :: system information collector (enterpise linux)
 #
@@ -25,13 +25,14 @@
 DEBUG=0
 USERUID=0 # root
 LOGDATE=`date +'%Y-%m-%d'`
-BASEPATH=/pd/home/bsummers/WORKING/SICEL
+# Update me if not running from script directory
+BASEPATH=./
 SCRIPTNAME=`echo ${0##*/} | cut -d\. -f1`
 SHORTHOSTNAME=`hostname -s`
 html=0
 xml=0
 csv=0
-output_file_prefix=$SHORTHOSTNAME
+prefix=$SHORTHOSTNAME
 
 # other vars
 LOCKFILE="/tmp/${SCRIPTNAME}.lock"
@@ -106,7 +107,7 @@ OSVER=`cat /etc/redhat-release | awk '{print $7}'`
 
 if [ $html = 1 ]; then
   # add header to TOC file
-   echo -n "<BR /><BR /><div style='width:35%;border-style:solid'>Collected on: ${MYDATE}</div><BR />" >> $HTMLTOC
+   echo -n "<BR /><BR /><div style='width:35%;border-style:solid'>Collected on: ${MYDATE}</div><BR />" > $HTMLTOC
    echo -n "<div style='font-size:90%;font-family:\"Courier New\"'>" >> $HTMLTOC
    echo -n "<b>Summary for $MYHOSTNAME<BR /><BR />" >> $HTMLTOC
 fi
@@ -655,8 +656,8 @@ if [ $html == 1 ]; then
   # add header to TOC file
   echo -n "<div>" >> $HTMLTOC
 
-  cat $HTMLTOC > "${output_file_prefix}.html"
-  cat $HTMLDATA >> "${output_file_prefix}.html"
+  cat $HTMLTOC >> "${prefix}.html"
+  cat $HTMLDATA >> "${prefix}.html"
 
   # remove temporary files
   rm -fr $HTMLTOC
@@ -664,16 +665,16 @@ if [ $html == 1 ]; then
 fi
 
 if [ $xml == 1 ]; then
-  echo "COMMAND,STATUS,OUTPUT" > "${output_file_prefix}.xml"
-  cat $xml >> "${output_file_prefix}.xml"
+  echo "COMMAND,STATUS,OUTPUT" > "${prefix}.xml"
+  cat $xml >> "${prefix}.xml"
 
   # remove temporary files
   rm -fr $XMLDATA
 fi
 
 if [ $csv == 1 ]; then
-  echo "COMMAND,STATUS,OUTPUT" > "${output_file_prefix}.csv"
-  cat $csv >> "${output_file_prefix}.csv"
+  echo "COMMAND,STATUS,OUTPUT" > "${prefix}.csv"
+  cat $csv >> "${prefix}.csv"
 
   # remove temporary files
   rm -fr $CSVDATA
