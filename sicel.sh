@@ -3,14 +3,14 @@
 # vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 #-------------------------------------------------------------------------------
-# Last-Updated :: <2012 Nov 26 09:39:59 PM Bracey Summers>
+# Last-Updated :: <2012 Nov 26 10:05:58 PM Bracey Summers>
 #
-# rhel6_audit.sh :: gather server information
+# sicel.sh :: system information collector (enterpise linux)
 #
 # @create date :: 2012-11-22
-# @category :: Script
+# @category :: App
 # @package :: NA
-# @author :: Bracey Summers <bcsummers@gmail.com>
+# @author :: Bracey Summers <bcsummersATgmail.com>
 # @copyright :: NA
 # @license :: NA
 # @version :: X.X
@@ -678,3 +678,15 @@ if [ $csv == 1 ]; then
   # remove temporary files
   rm -fr $CSVDATA
 fi
+
+################################################################################
+# SMART END HERE
+################################################################################
+
+# remove lock file
+RemoveLockFile
+
+# log timer 
+TIMER=$(LogTime) 
+MSG="Total Run Time [$TIMER]." 
+LogInfo "$MSG"
