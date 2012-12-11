@@ -18,7 +18,7 @@
 #
 RunCommand()
 {
-    LogInfo "$MSG"
+    LogInfo "$@"
     OUTPUT=$(echo $@ | /bin/sh)
     STATUS=$?
 
@@ -35,6 +35,7 @@ RunCommand()
         STATUS_MSG="FAILED"
         STATUS_COLOR="RED"
       fi
+      LogInfo "STATUS -> $STATUS_MSG"
 
       echo -n "<p style='font-size:80%;font-style:italic;margin-top:0;color:${STATUS_COLOR}'>(${STATUS_MSG})</p>" >> $HTMLDATA
     fi

@@ -3,7 +3,7 @@
 # vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 #-------------------------------------------------------------------------------
-# Last-Updated :: <2012 Nov 26 10:14:41 PM Bracey Summers>
+# Last-Updated :: <2012 Dec 04 08:50:24 PM Bracey Summers>
 #
 # sicel.sh :: system information collector (enterpise linux)
 #
@@ -505,6 +505,42 @@ RunCommand "cat /etc/ssh/ssh_config"
 #------------------------
 Header2 "sshd_config"
 RunCommand "cat /etc/ssh/sshd_config"
+
+#------------------------
+Header2 "Postfix"
+for i in `ls /etc/postfix/`
+do 
+  Header3 "$i"
+  RunCommand "cat /etc/postfix/$i"
+done
+
+#------------------------
+Header2 "Samba"
+for i in `ls /etc/samba/`
+do 
+  Header3 "$i"
+  RunCommand "cat /etc/samba/$i"
+done
+
+#------------------------
+Header2 "UPS (NUT)"
+for i in `ls /etc/ups/`
+do 
+  Header3 "$i"
+  RunCommand "cat /etc/ups/$i"
+done
+
+#------------------------
+Header2 "BIND"
+RunCommand "cat /etc/named.conf"
+
+#------------------------
+Header2 "DHCPD"
+for i in `ls /etc/dhcp/`
+do 
+  Header3 "$i"
+  RunCommand "cat /etc/dhcp/$i"
+done
 
 #-------------------------------------------------
 Header1 "Software"
