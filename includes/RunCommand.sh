@@ -25,7 +25,8 @@ RunCommand()
     if [ $html == 1 ]; then
       if [ $STATUS == 0 ]; then
         # output
-        echo -n "<div style='border:1px dotted black;background-color:E1E1E1;margin:2px'>" >> $HTMLDATA
+        echo -n "<div style='font-size:80%;font-family: Courier, \"Courier New\", monospace;font-style:italic;margin-top:0;color:gray'>($@)</div>" >> $HTMLDATA
+        echo -n "<div style='font-size:80%;font-family: Courier, \"Courier New\", monospace;border:1px dotted black;background-color:E1E1E1;margin:2px'>" >> $HTMLDATA
         echo "$OUTPUT" | sed 's/\s/\&nbsp;/g' | sed 's/$/\<BR \/\>/g' >> $HTMLDATA
         echo -n "</div>" >> $HTMLDATA
 
@@ -37,7 +38,7 @@ RunCommand()
       fi
       LogInfo "STATUS -> $STATUS_MSG"
 
-      echo -n "<p style='font-size:80%;font-style:italic;margin-top:0;color:${STATUS_COLOR}'>(${STATUS_MSG})</p>" >> $HTMLDATA
+      echo -n "<div style='font-size:80%;font-family: Courier, \"Courier New\", monospace;font-style:italic;margin-top:0;color:${STATUS_COLOR}'>(${STATUS_MSG})</div>" >> $HTMLDATA
     fi
 
     if [ $csv == 1 ]; then

@@ -3,7 +3,7 @@
 # vim: set expandtab tabstop=4 shiftwidth=4 softtabstop=4
 
 #-------------------------------------------------------------------------------
-# Last-Updated :: <2012 Dec 04 08:50:24 PM Bracey Summers>
+# Last-Updated :: <2012 Dec 12 08:33:09 PM Bracey Summers>
 #
 # sicel.sh :: system information collector (enterpise linux)
 #
@@ -107,9 +107,16 @@ OSVER=`cat /etc/redhat-release | awk '{print $7}'`
 
 if [ $html = 1 ]; then
   # add header to TOC file
-   echo -n "<BR /><BR /><div style='width:35%;border-style:solid'>Collected on: ${MYDATE}</div><BR />" > $HTMLTOC
-   echo -n "<div style='font-size:90%;font-family:\"Courier New\"'>" >> $HTMLTOC
-   echo -n "<b>Summary for $MYHOSTNAME<BR /><BR />" >> $HTMLTOC
+   echo -e "<html>" > $HTMLTOC
+   echo -e "\t<head>" >> $HTMLTOC
+   echo -e "\t\t<title>" >> $HTMLTOC
+   echo -e "\t\tSummary for ${MYHOSTNAME}" >> $HTMLTOC
+   echo -e "\t\t</title>" >> $HTMLTOC
+   echo -e "\t</head>" >> $HTMLTOC
+   echo -e "<html>" >> $HTMLTOC
+   echo -e "<div style='font-size:120%;font-family: Courier, \"Courier New\", monospace'></div>" >> $HTMLTOC
+   echo -e "<div style='font-size:100%;font-family: Courier, \"Courier New\", monospace;width:25%;border-style:solid'>Collected on: ${MYDATE}</div><BR />" >> $HTMLTOC
+   echo -e "<div style='font-size:90%;font-family: Courier, \"Courier New\", monospace'>" >> $HTMLTOC
 fi
 
 #-------------------------------------------------
@@ -690,8 +697,9 @@ RunCommand "cat /etc/idmapd.conf"
 # output the data
 if [ $html == 1 ]; then
   # add header to TOC file
-  echo -n "<div>" >> $HTMLTOC
+  echo -n "</div>" >> $HTMLTOC
 
+  echo -n "</html>" >> $HTMLDATA
   cat $HTMLTOC >> "${prefix}.html"
   cat $HTMLDATA >> "${prefix}.html"
 
